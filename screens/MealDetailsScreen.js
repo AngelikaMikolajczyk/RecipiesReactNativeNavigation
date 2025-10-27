@@ -5,22 +5,31 @@ import { Subtitle } from '../components/MealDetail/Subtitle';
 import { List } from '../components/MealDetail/List';
 import { useLayoutEffect } from "react";
 import { IconButton } from '../components/IconButton';
-import { useContext } from "react";
-import { FavoritesContext } from '../store/context/favorites-context';
+// import { useContext } from "react";
+// import { FavoritesContext } from '../store/context/favorites-context';
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from '../store/redux/favorites';
 
 export function MealDetailsScreen({route, navigation}) {
-    const favoriteMealsContext = useContext(FavoritesContext);
+    // const favoriteMealsContext = useContext(FavoritesContext);
+    const favoritesMealIds = useSelector((state) => {
+        return state.favoriteMeals.ids;
+    });
+    
+    const dispatch = useDispatch();
     const { mealId } = route.params;
     const mealDetails = MEALS.find((meal) => meal.id === mealId);
-    console.log('favoriteMealsContext', favoriteMealsContext);
     
-    const mealIsFavorite = favoriteMealsContext.ids.includes(mealId);
+    // const mealIsFavorite = favoriteMealsContext.ids.includes(mealId);
+    const mealIsFavorite = favoritesMealIds.includes(mealId);
 
     function onChangeFavoriteStatus() {
         if(mealIsFavorite) {
-            favoriteMealsContext.removeFavorite(mealId)
+            // favoriteMealsContext.removeFavorite(mealId)
+            dispatch(removeFavorite({id: mealId}));
         } else {
-            favoriteMealsContext.addFavorite(mealId)
+            // favoriteMealsContext.addFavorite(mealId)
+            dispatch(addFavorite({id: mealId}));
         }
         
     }
@@ -28,7 +37,7 @@ export function MealDetailsScreen({route, navigation}) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => {
-                return <IconButton title='tap me!' onPress={onChangeFavoriteStatus} icon={mealIsFavorite ? 'star' : 'staro'} color='white'/>
+                return <IconButton title='tap me!' onPress={onChangeFavoriteStatus} icon={mealIsFavorite ? 'star' : 'star-o'} color='white'/>
             }
         })
     }, [navigation, onChangeFavoriteStatus])

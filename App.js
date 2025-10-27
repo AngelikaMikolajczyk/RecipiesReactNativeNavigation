@@ -10,7 +10,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { FavoritesScreen } from './screens/FavoritesScreen';
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { FavoritesContextProvider } from './store/context/favorites-context'
+// import { FavoritesContextProvider } from './store/context/favorites-context';
+import { Provider } from 'react-redux';
+import { store } from './store/redux/store';
 
 SystemUI.setBackgroundColorAsync("#24180f");
 
@@ -41,7 +43,8 @@ export default function App() {
   return (
     <>
       <StatusBar style='light'/>
-      <FavoritesContextProvider>
+      {/* <FavoritesContextProvider> */}
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{
                 headerStyle: { backgroundColor: '#501B2CFF'},
@@ -76,7 +79,8 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavoritesContextProvider>
+        </Provider>
+      {/* </FavoritesContextProvider> */}
     </>
   );
 }
