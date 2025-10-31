@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ReactNativeNavigation",
+    "name": "Recipe Book RN",
     "slug": "ReactNativeNavigation",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,17 +14,26 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.angelikam.ReactNativeNavigation"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "versionCode": 1,
+      "package": "com.angelikam.ReactNativeNavigation"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0e2bfc4f-b6de-4c2c-afe6-1cf0449a2003"
+      }
     }
   }
 }
